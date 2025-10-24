@@ -24,6 +24,24 @@
             background-position: center; 
             background-repeat: no-repeat;
         }
+
+        /* Estilos clave para el carrusel de productos/fichas */
+        .carousel-container {
+            /* Oculta la barra de desplazamiento nativa */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            scroll-behavior: smooth; /* Deslizamiento suave */
+            scroll-snap-type: x mandatory; /* Fuerza el snap a las posiciones */
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .carousel-item {
+            flex: 0 0 100%; /* Cada elemento ocupa el 100% del ancho del contenedor */
+            scroll-snap-align: start; /* El punto de anclaje está al inicio del elemento */
+        }
+
     </style>
 </head>
 
@@ -64,49 +82,103 @@
 
     <section id="productos" class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-6 lg:px-8">
 
-        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center"
-             data-id="GOLDULTRA" 
-             data-nombre="ULTRA ADVANC3 GOLD 30 CAPSULAS" 
-             data-precio="180">
-            <img src="imgparaproduccion/GOLDULTRA.png" alt="Producto 1" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg mb-4">
+        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center relative"
+            data-id="GOLDULTRA" 
+            data-nombre="ULTRA ADVANC3 GOLD 30 CAPSULAS" 
+            data-precio="180">
+            
+            <div class="relative">
+                <div class="carousel-container flex overflow-x-scroll snap-x snap-mandatory rounded-lg mb-4">
+                    
+                    <div class="carousel-item flex justify-center items-center">
+                        <img src="imgparaproduccion/GOLDULTRA.png" alt="ULTRA ADVANC3 GOLD" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg">
+                    </div>
+                    
+                    <div class="carousel-item flex justify-center items-center">
+                        <img src="imgparaproduccion/fichaGOLDULTRA.png" alt="Ficha técnica GOLD ULTRA" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg cursor-pointer imagen-zoom">
+                    </div>
+
+                </div>
+                
+                <button class="btn-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full ml-1 hover:bg-opacity-70 transition z-10" data-target="GOLDULTRA">
+                    &lt;
+                </button>
+                <button class="btn-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full mr-1 hover:bg-opacity-70 transition z-10" data-target="GOLDULTRA">
+                    &gt;
+                </button>
+            </div>
             <h3 class="text-lg sm:text-xl font-semibold mb-1">ULTRA ADVANC3 GOLD CON 30 CAPSULAS</h3>
             <p class="precio-producto text-green-600 font-bold text-base sm:text-lg mb-2">$180 MXN</p>
-            <img src="imgparaproduccion/fichaGOLDULTRA.png" alt="Ficha técnica" class="mx-auto rounded-lg mb-3 cursor-pointer imagen-zoom">
             <p class="text-xs sm:text-sm text-gray-500">Limpia y renueva tu organismo de forma 100% natural.</p>
             <button class="btn-anadir-carrito mt-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition">
                 ➕ Añadir al Carrito
             </button>
         </div>
+        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center relative"
+            data-id="ASHWAGANDHA" 
+            data-nombre="ASHWAGANDHA 60 CAPSULAS" 
+            data-precio="220">
+            
+            <div class="relative">
+                <div class="carousel-container flex overflow-x-scroll snap-x snap-mandatory rounded-lg mb-4" id="carousel-ASHWAGANDHA">
+                    
+                    <div class="carousel-item flex justify-center items-center">
+                        <img src="imgparaproduccion/ashwagandha.png" alt="ASHWAGANDHA" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg">
+                    </div>
+                    
+                    <div class="carousel-item flex justify-center items-center">
+                        <img src="imgparaproduccion/FICHAASHWAGANDHA.png" alt="Ficha técnica ASHWAGANDHA" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg cursor-pointer imagen-zoom">
+                    </div>
 
-        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center"
-             data-id="ASHWAGANDHA" 
-             data-nombre="ASHWAGANDHA 60 CAPSULAS" 
-             data-precio="220">
-            <img src="imgparaproduccion/ashwagandha.png" alt="Producto 2" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg mb-4">
+                </div>
+                
+                <button class="btn-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full ml-1 hover:bg-opacity-70 transition z-10" data-target="ASHWAGANDHA">
+                    &lt;
+                </button>
+                <button class="btn-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full mr-1 hover:bg-opacity-70 transition z-10" data-target="ASHWAGANDHA">
+                    &gt;
+                </button>
+            </div>
             <h3 class="text-lg sm:text-xl font-semibold mb-1">ASHWAGANDHA CON 60 CAPSULAS</h3>
             <p class="precio-producto text-green-600 font-bold text-base sm:text-lg mb-2">$220 MXN</p>
-            <img src="imgparaproduccion/FICHAASHWAGANDHA.png" alt="Ficha técnica" class="mx-auto rounded-lg mb-3 cursor-pointer imagen-zoom">
             <p class="text-xs sm:text-sm text-gray-500">Relaja cuerpo y mente con nuestro suplemento natural.</p>
             <button class="btn-anadir-carrito mt-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition">
                 ➕ Añadir al Carrito
             </button>
         </div>
+        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center relative"
+            data-id="BPASSDORADO" 
+            data-nombre="BPASS DORADO 30 CAPSULAS" 
+            data-precio="250">
+            
+            <div class="relative">
+                <div class="carousel-container flex overflow-x-scroll snap-x snap-mandatory rounded-lg mb-4" id="carousel-BPASSDORADO">
+                    
+                    <div class="carousel-item flex justify-center items-center">
+                        <img src="imgparaproduccion/bypassdorado.png" alt="BPASS DORADO" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg">
+                    </div>
+                    
+                    <div class="carousel-item flex justify-center items-center">
+                        <img src="imgparaproduccion/fichabpassdorado.png" alt="Ficha técnica BPASS DORADO" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg cursor-pointer imagen-zoom">
+                    </div>
 
-        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center"
-             data-id="BPASSDORADO" 
-             data-nombre="BPASS DORADO 30 CAPSULAS" 
-             data-precio="250">
-            <img src="imgparaproduccion/bypassdorado.png" alt="Producto 3" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg mb-4">
+                </div>
+                
+                <button class="btn-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full ml-1 hover:bg-opacity-70 transition z-10" data-target="BPASSDORADO">
+                    &lt;
+                </button>
+                <button class="btn-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full mr-1 hover:bg-opacity-70 transition z-10" data-target="BPASSDORADO">
+                    &gt;
+                </button>
+            </div>
             <h3 class="text-lg sm:text-xl font-semibold mb-1">BPASS DORADO CON 30 CAPSULAS</h3>
             <p class="precio-producto text-green-600 font-bold text-base sm:text-lg mb-2">$250 MXN</p>
-            <img src="imgparaproduccion/fichabpassdorado.png" alt="Ficha técnica" class="mx-auto rounded-lg mb-3 cursor-pointer imagen-zoom">
             <p class="text-xs sm:text-sm text-gray-500">Mejora tu energía y rendimiento diario con ingredientes naturales.</p>
             <button class="btn-anadir-carrito mt-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition">
                 ➕ Añadir al Carrito
             </button>
         </div>
-        
-    </section>
+        </section>
 
     <button id="carrito-flotante" 
             class="bg-red-500 hover:bg-red-600 text-white py-3 px-5 rounded-full text-2xl font-semibold shadow-2xl transition transform hover:scale-110">
@@ -349,22 +421,16 @@ https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}%0A%0A
             `.trim();
             
             // 4. Redirigir al cliente a la Pasarela de Pago (simulación)
-            // Aquí en un sistema real, harías una petición a tu servidor, que a su vez llama a la API de Mercado Pago para generar el link
-            // y luego redirigiría.
-            // Por simplicidad, alertamos y simulamos la redirección.
-            
             alert('Serás redirigido a la pasarela de pago (SIMULACIÓN). Una vez pagues, el vendedor recibirá el pedido por WhatsApp.');
             
             // SIMULACIÓN: Redireccionamos a una página de pago ficticia (la real sería el Link de Pago)
             window.location.href = `https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}`;
 
             // 5. Enviar el WhatsApp (esto lo hacemos *después* de que el cliente sea redirigido)
-            // OJO: En un sistema real, este WhatsApp solo se enviaría una vez que el Webhook de la pasarela confirme el pago exitoso.
-            // Lo ponemos aquí para que veas el formato.
             setTimeout(() => {
                 const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensajeWA)}`;
                 window.open(urlWhatsApp, '_blank');
-            }, 500); // Pequeño retraso para que la redirección al pago sea prioritaria
+            }, 500); 
 
             // 6. Limpiar carrito y cerrar modal
             carrito = [];
@@ -372,24 +438,21 @@ https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}%0A%0A
             modalCarrito.classList.add('hidden');
         });
 
-        // Inicializar el carrito al cargar la página
-        document.addEventListener('DOMContentLoaded', renderizarCarrito);
-        
-        // --- 4. SCRIPT DEL BUSCADOR Y VISOR DE IMÁGENES (Manteniendo el tuyo) ---
-        // (Tu código de buscador y visor de imágenes se mantiene aquí)
+        // --- 4. SCRIPT DEL BUSCADOR Y VISOR DE IMÁGENES ---
+
         const buscador = document.getElementById('buscador');
         const productos = document.querySelectorAll('.producto');
 
         buscador.addEventListener('input', () => {
           const filtro = buscador.value.toLowerCase();
           productos.forEach(producto => {
-            const texto = producto.textContent.toLowerCase();
-            producto.style.display = texto.includes(filtro) ? 'block' : 'none';
+            // El display debe ser 'block' para que funcione el grid
+            producto.style.display = producto.textContent.toLowerCase().includes(filtro) ? 'flex' : 'none';
           });
         });
         
-        const imagenes = document.querySelectorAll('.imagen-zoom'); // Cambié el selector para solo aplicar zoom a las fichas
-        // ... (resto de tu código de modal de imagen) ...
+        // Modal de Zoom (Se mantiene)
+        const imagenes = document.querySelectorAll('.imagen-zoom'); 
 
         const modal = document.createElement('div');
         modal.id = 'modalImagen';
@@ -456,6 +519,43 @@ https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}%0A%0A
             alert('Error al descargar la imagen');
           }
         });
+
+        // --- 5. LÓGICA DEL CARRUSEL DE IMAGEN/FICHA TÉCNICA ---
+
+        function setupCarousels() {
+            // Recorre todos los botones de navegación
+            document.querySelectorAll('.btn-prev, .btn-next').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    // Encuentra el contenedor .producto más cercano
+                    const productoDiv = e.target.closest('.producto');
+                    // Busca el contenedor de las imágenes dentro de ese producto
+                    const carousel = productoDiv.querySelector('.carousel-container');
+                    
+                    if (!carousel) return;
+
+                    // Calcula el ancho de un solo item (100% del contenedor)
+                    const itemWidth = carousel.offsetWidth; 
+                    
+                    if (e.target.classList.contains('btn-next')) {
+                        // Desliza al siguiente item (Ficha Técnica)
+                        carousel.scrollLeft += itemWidth;
+                    } else if (e.target.classList.contains('btn-prev')) {
+                        // Desliza al item anterior (Imagen de Producto)
+                        carousel.scrollLeft -= itemWidth;
+                    }
+                    
+                    // Asegúrate de que no se salga de los límites
+                    // El scroll-snap ayuda, pero esto asegura la lógica de las flechas
+                });
+            });
+        }
+
+        // Inicializar todas las funciones al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarCarrito();
+            setupCarousels(); // Inicializa el carrusel
+        });
+        
     </script>
 </body>
 </html>
