@@ -283,87 +283,68 @@
 
         // --- 3. LÓGICA DE COMPRA Y WHATSAPP (SEMI-MANUAL) ---
 
-        formularioEnvio.addEventListener('submit', (e) => {
-            e.preventDefault();
+formularioEnvio.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-            // 1. Recopilar datos del formulario
-            const datosEnvio = {
-                nombre: document.getElementById('nombre').value,
-                calle: document.getElementById('calle').value,
-                num_ext: document.getElementById('num_ext').value,
-                num_int: document.getElementById('num_int').value,
-                colonia: document.getElementById('colonia').value,
-                municipio: document.getElementById('municipio').value,
-                codigo_postal: document.getElementById('codigo_postal').value,
-                telefono: document.getElementById('telefono').value,
-            };
+    // 1. Recopilar datos del formulario
+    const datosEnvio = {
+        nombre: document.getElementById('nombre').value,
+        calle: document.getElementById('calle').value,
+        num_ext: document.getElementById('num_ext').value,
+        num_int: document.getElementById('num_int').value,
+        colonia: document.getElementById('colonia').value,
+        municipio: document.getElementById('municipio').value,
+        codigo_postal: document.getElementById('codigo_postal').value,
+        telefono: document.getElementById('telefono').value,
+    };
 
-            // 2. Generar el resumen del pedido y total
-            let total = 0;
-            let resumenProductos = '';
-            // ID Único basado en el timestamp (útil para referencia)
-            const orderID = `WEB-${Date.now().toString().slice(-8)}`; 
+    // 2. Generar el resumen del pedido y total
+    let total = 0;
+    let resumenProductos = '';
+    const orderID = `WEB-${Date.now().toString().slice(-8)}`; 
 
-            carrito.forEach(item => {
-                const subtotal = item.precio * item.cantidad;
-                total += subtotal;
-                // Usa %0A para saltos de línea en WhatsApp
-                resumenProductos += ` - ${item.nombre} (x${item.cantidad}) - $${subtotal.toFixed(2)} MXN%0A`;
-            });
-            
-            // 3. Define las instrucciones de pago usando tus datos REALES
-            const datosBancarios = `
-*INSTRUCCIONES DE PAGO:*
-Monto Total a Transferir: *$${total.toFixed(2)} MXN*%0A%0A
-*DATOS BANCARIOS (${STORE_CONFIG.PAGO.BANCO}):*%0A
-Banco: ${STORE_CONFIG.PAGO.BANCO}%0A
-CLABE Interbancaria: ${STORE_CONFIG.PAGO.CLABE}%0A
-Nombre del Beneficiario: ${STORE_CONFIG.PAGO.BENEFICIARIO}%0A%0A
-*¡MUY IMPORTANTE!*
-1. Por favor, realiza la transferencia por el monto exacto.
-2. *Envíanos la FOTO o FICHA de pago* por este chat para que podamos confirmar la recepción del dinero y procesar tu envío.
-`;
+    carrito.forEach(item => {
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+        resumenProductos += ` - ${item.nombre} (x${item.cantidad}) - $${subtotal.toFixed(2)} MXN%0A`;
+    });
+    
+    // *** MODIFICACIÓN CLAVE: Se ELIMINA la definición de datosBancarios ***
+    
+    // 3. Frase clave para el disparador de la auto-respuesta
+    const solicitudPago = `*TOTAL A PAGAR: $${total.toFixed(2)} MXN* %0A%0A*¡SOLICITO DATOS DE PAGO!* Por favor, envíame las instrucciones para transferir y completar mi pedido.`;
 
-            // 4. Arma el mensaje final
-            const mensajeWA = encodeURIComponent(
-                `¡NUEVO PEDIDO WEB! #${orderID}\n\n` +
-                `*CLIENTE:*\n` +
-                `Nombre: ${datosEnvio.nombre}\n` +
-                `Teléfono: ${datosEnvio.telefono}\n\n` +
-                `*DIRECCIÓN DE ENVÍO:*\n` +
-                `${datosEnvio.calle} #${datosEnvio.num_ext}` + 
-                (datosEnvio.num_int ? ` Int. ${datosEnvio.num_int}` : '') + `\n` +
-                `Colonia: ${datosEnvio.colonia}\n` +
-                `Municipio: ${datosEnvio.municipio}\n` +
-                `C.P.: ${datosEnvio.codigo_postal}\n\n` +
-                `*DETALLE DEL PEDIDO:*\n${resumenProductos}\n` +
-                '-----------------------------------\n' +
-                datosBancarios
-            );
 
-            // 5. Abrir WhatsApp en una nueva pestaña
-            const urlWhatsApp = `https://wa.me/${STORE_CONFIG.WHATSAPP_NUMERO}?text=${mensajeWA}`;
-            window.open(urlWhatsApp, '_blank');
-            
-            // 6. Alerta de confirmación al cliente (opcional)
-            alert('¡Pedido Enviado! Serás redirigido a WhatsApp para enviar el mensaje con los datos de pago. Por favor, confirma el envío en WhatsApp.');
+    // 4. Arma el mensaje final
+    const mensajeWA = encodeURIComponent(
+        `¡NUEVO PEDIDO WEB! #${orderID}\n\n` +
+        `*CLIENTE:*\n` +
+        `Nombre: ${datosEnvio.nombre}\n` +
+        `Teléfono: ${datosEnvio.telefono}\n\n` +
+        `*DIRECCIÓN DE ENVÍO:*\n` +
+        `${datosEnvio.calle} #${datosEnvio.num_ext}` + 
+        (datosEnvio.num_int ? ` Int. ${datosEnvio.num_int}` : '') + `\n` +
+        `Colonia: ${datosEnvio.colonia}\n` +
+        `Municipio: ${datosEnvio.municipio}\n` +
+        `C.P.: ${datosEnvio.codigo_postal}\n\n` +
+        `*DETALLE DEL PEDIDO:*\n${resumenProductos}\n` +
+        '-----------------------------------\n' +
+        solicitudPago // <-- Ahora solo se incluye la solicitud de pago
+    );
 
-            // 7. Limpiar carrito y cerrar modal
-            carrito = [];
-            renderizarCarrito();
-            modalCarrito.classList.add('hidden');
-            formularioEnvio.reset();
-        });
+    // 5. Abrir WhatsApp en una nueva pestaña
+    const urlWhatsApp = `https://wa.me/${STORE_CONFIG.WHATSAPP_NUMERO}?text=${mensajeWA}`;
+    window.open(urlWhatsApp, '_blank');
+    
+    // 6. Alerta de confirmación al cliente (opcional)
+    alert('¡Pedido Enviado! Serás redirigido a WhatsApp para enviar el mensaje con los datos de tu pedido y recibir los datos de pago.');
 
-        // --- 4. SCRIPT DEL BUSCADOR Y VISOR DE IMÁGENES ---
-
-        buscador.addEventListener('input', () => {
-          const productos = document.querySelectorAll('.producto');
-          const filtro = buscador.value.toLowerCase();
-          productos.forEach(producto => {
-            producto.style.display = producto.textContent.toLowerCase().includes(filtro) ? 'flex' : 'none';
-          });
-        });
+    // 7. Limpiar carrito y cerrar modal
+    carrito = [];
+    renderizarCarrito();
+    modalCarrito.classList.add('hidden');
+    formularioEnvio.reset();
+});
 
         // Código para el modal de zoom de imagen (Ya existente)
         const modal = document.createElement('div');
