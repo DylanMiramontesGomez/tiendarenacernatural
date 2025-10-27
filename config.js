@@ -9,7 +9,7 @@ const STORE_CONFIG = {
     FONDO_URL: "imgparaproduccion/fondo4.jpg", 
 
     // --- DATOS DE CONTACTO Y PAGO (TUS DATOS REALES) ---
-    WHATSAPP_NUMERO: '528117875917', // Código de país (52) + número
+    WHATSAPP_NUMERO: '528182534891', // Código de país (52) + número
     
     PAGO: {
         // Rellena estos datos con la información de tu cuenta bancaria real
