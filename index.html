@@ -306,13 +306,13 @@ formularioEnvio.addEventListener('submit', (e) => {
     carrito.forEach(item => {
         const subtotal = item.precio * item.cantidad;
         total += subtotal;
-        resumenProductos += ` - ${item.nombre} (x${item.cantidad}) - $${subtotal.toFixed(2)} MXN%0A`;
+        resumenProductos += ` - ${item.nombre} (x${item.cantidad}) - $${subtotal.toFixed(2)} MXN\r\n`;
     });
     
     // *** MODIFICACIÓN CLAVE: Se ELIMINA la definición de datosBancarios ***
     
     // 3. Frase clave para el disparador de la auto-respuesta
-    const solicitudPago = `*TOTAL A PAGAR: $${total.toFixed(2)} MXN* %0A%0A*¡SOLICITO DATOS DE PAGO!* Por favor, envíame las instrucciones para transferir y completar mi pedido.`;
+    const solicitudPago = `*TOTAL A PAGAR: $${total.toFixed(2)} MXN \r\n\r\n*¡SOLICITO... DATOS DE PAGO!* Por favor, envíame las instrucciones para transferir y completar mi pedido.`;
 
 
     // 4. Arma el mensaje final
