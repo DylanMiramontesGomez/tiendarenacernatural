@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos Naturistas EnerGreen - Carrito</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="config.js"></script> 
     <style>
         /* Estilos para el botón flotante del carrito */
         #carrito-flotante {
@@ -17,9 +18,8 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .modal { animation: fadeIn 0.3s ease-in-out; }
 
-        /* Estilos del cuerpo para fondo */
+        /* Estilos del cuerpo para fondo: Será sobreescrito por JS */
         body {
-            background-image: url('imgparaproduccion/fondo4.jpg'); 
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat;
@@ -28,18 +28,18 @@
         /* Estilos clave para el carrusel de productos/fichas */
         .carousel-container {
             /* Oculta la barra de desplazamiento nativa */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            scroll-behavior: smooth; /* Deslizamiento suave */
-            scroll-snap-type: x mandatory; /* Fuerza el snap a las posiciones */
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+            scroll-behavior: smooth; 
+            scroll-snap-type: x mandatory; 
         }
         .carousel-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none; 
         }
 
         .carousel-item {
-            flex: 0 0 100%; /* Cada elemento ocupa el 100% del ancho del contenedor */
-            scroll-snap-align: start; /* El punto de anclaje está al inicio del elemento */
+            flex: 0 0 100%; 
+            scroll-snap-align: start; 
         }
 
     </style>
@@ -47,15 +47,14 @@
 
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-    <div class="bg-green-600 text-white text-center py-2 text-sm sm:text-lg font-semibold shadow-md">
-        🌿 ¡Promoción! Envíos gratis y 10% de descuento en todos los productos 🌿
+    <div id="promo-banner" class="bg-green-600 text-white text-center py-2 text-sm sm:text-lg font-semibold shadow-md">
     </div>
 
     <nav class="bg-white shadow-md">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
             <div class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3">
-                <img src="imgparaproduccion/LOGORENACERNATURALNEGRO.png" alt="Logo" class="h-16 sm:h-20 w-16 sm:w-20 object-contain">
-                <h1 class="text-3xl sm:text-6xl font-serif text-green-700 text-center sm:text-left">RENACER NATURAL</h1>
+                <img id="logo-img" src="" alt="Logo" class="h-16 sm:h-20 w-16 sm:w-20 object-contain">
+                <h1 id="nombre-tienda" class="text-3xl sm:text-6xl font-serif text-green-700 text-center sm:text-left"></h1>
             </div>
             <ul class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 mt-4 sm:mt-0 text-gray-700 font-medium text-center">
                 <li><a href="#inicio" class="hover:text-green-600">Inicio</a></li>
@@ -81,120 +80,23 @@
     </header>
 
     <section id="productos" class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-6 lg:px-8">
-
-        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center relative"
-            data-id="GOLDULTRA" 
-            data-nombre="ULTRA ADVANC3 GOLD 30 CAPSULAS" 
-            data-precio="180">
-            
-            <div class="relative">
-                <div class="carousel-container flex overflow-x-scroll snap-x snap-mandatory rounded-lg mb-4">
-                    
-                    <div class="carousel-item flex justify-center items-center">
-                        <img src="imgparaproduccion/GOLDULTRA.png" alt="ULTRA ADVANC3 GOLD" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg">
-                    </div>
-                    
-                    <div class="carousel-item flex justify-center items-center">
-                        <img src="imgparaproduccion/fichaGOLDULTRA.png" alt="Ficha técnica GOLD ULTRA" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg cursor-pointer imagen-zoom">
-                    </div>
-
-                </div>
-                
-                <button class="btn-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full ml-1 hover:bg-opacity-70 transition z-10" data-target="GOLDULTRA">
-                    &lt;
-                </button>
-                <button class="btn-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full mr-1 hover:bg-opacity-70 transition z-10" data-target="GOLDULTRA">
-                    &gt;
-                </button>
-            </div>
-            <h3 class="text-lg sm:text-xl font-semibold mb-1">ULTRA ADVANC3 GOLD CON 30 CAPSULAS</h3>
-            <p class="precio-producto text-green-600 font-bold text-base sm:text-lg mb-2">$180 MXN</p>
-            <p class="text-xs sm:text-sm text-gray-500">Limpia y renueva tu organismo de forma 100% natural.</p>
-            <button class="btn-anadir-carrito mt-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition">
-                ➕ Añadir al Carrito
-            </button>
-        </div>
-        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center relative"
-            data-id="ASHWAGANDHA" 
-            data-nombre="ASHWAGANDHA 60 CAPSULAS" 
-            data-precio="220">
-            
-            <div class="relative">
-                <div class="carousel-container flex overflow-x-scroll snap-x snap-mandatory rounded-lg mb-4" id="carousel-ASHWAGANDHA">
-                    
-                    <div class="carousel-item flex justify-center items-center">
-                        <img src="imgparaproduccion/ashwagandha.png" alt="ASHWAGANDHA" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg">
-                    </div>
-                    
-                    <div class="carousel-item flex justify-center items-center">
-                        <img src="imgparaproduccion/FICHAASHWAGANDHA.png" alt="Ficha técnica ASHWAGANDHA" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg cursor-pointer imagen-zoom">
-                    </div>
-
-                </div>
-                
-                <button class="btn-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full ml-1 hover:bg-opacity-70 transition z-10" data-target="ASHWAGANDHA">
-                    &lt;
-                </button>
-                <button class="btn-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full mr-1 hover:bg-opacity-70 transition z-10" data-target="ASHWAGANDHA">
-                    &gt;
-                </button>
-            </div>
-            <h3 class="text-lg sm:text-xl font-semibold mb-1">ASHWAGANDHA CON 60 CAPSULAS</h3>
-            <p class="precio-producto text-green-600 font-bold text-base sm:text-lg mb-2">$220 MXN</p>
-            <p class="text-xs sm:text-sm text-gray-500">Relaja cuerpo y mente con nuestro suplemento natural.</p>
-            <button class="btn-anadir-carrito mt-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition">
-                ➕ Añadir al Carrito
-            </button>
-        </div>
-        <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center relative"
-            data-id="BPASSDORADO" 
-            data-nombre="BPASS DORADO 30 CAPSULAS" 
-            data-precio="250">
-            
-            <div class="relative">
-                <div class="carousel-container flex overflow-x-scroll snap-x snap-mandatory rounded-lg mb-4" id="carousel-BPASSDORADO">
-                    
-                    <div class="carousel-item flex justify-center items-center">
-                        <img src="imgparaproduccion/bypassdorado.png" alt="BPASS DORADO" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg">
-                    </div>
-                    
-                    <div class="carousel-item flex justify-center items-center">
-                        <img src="imgparaproduccion/fichabpassdorado.png" alt="Ficha técnica BPASS DORADO" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg cursor-pointer imagen-zoom">
-                    </div>
-
-                </div>
-                
-                <button class="btn-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full ml-1 hover:bg-opacity-70 transition z-10" data-target="BPASSDORADO">
-                    &lt;
-                </button>
-                <button class="btn-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full mr-1 hover:bg-opacity-70 transition z-10" data-target="BPASSDORADO">
-                    &gt;
-                </button>
-            </div>
-            <h3 class="text-lg sm:text-xl font-semibold mb-1">BPASS DORADO CON 30 CAPSULAS</h3>
-            <p class="precio-producto text-green-600 font-bold text-base sm:text-lg mb-2">$250 MXN</p>
-            <p class="text-xs sm:text-sm text-gray-500">Mejora tu energía y rendimiento diario con ingredientes naturales.</p>
-            <button class="btn-anadir-carrito mt-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition">
-                ➕ Añadir al Carrito
-            </button>
-        </div>
-        </section>
+    </section>
 
     <button id="carrito-flotante" 
-            class="bg-red-500 hover:bg-red-600 text-white py-3 px-5 rounded-full text-2xl font-semibold shadow-2xl transition transform hover:scale-110">
+            class="bg-gray-400 hover:bg-red-600 text-white py-3 px-5 rounded-full text-2xl font-semibold shadow-2xl transition transform hover:scale-110">
         🛒 <span id="contador-flotante">0</span>
     </button>
 
     <div id="contacto" class="text-center my-8 sm:my-12 px-4">
-        <a href="https://wa.me/528117875917" target="_blank"
+        <a id="contacto-wa" href="" target="_blank"
             class="bg-green-500 hover:bg-green-600 text-white py-3 px-6 sm:px-8 rounded-full text-base sm:text-xl font-semibold shadow-lg transition">
             💬 Contáctanos por WhatsApp
         </a>
     </div>
 
     <footer class="bg-green-700 text-white text-center py-6 px-4">
-        <p class="text-sm">© 2025 EnerGreen | Todos los derechos reservados</p>
-        <p class="text-xs mt-1">Sitio desarrollado por Dylan</p>
+        <p class="text-sm">© 2025 Renacer Natural | Todos los derechos reservados</p>
+        <p class="text-xs mt-1">Sitio desarrollado por Dylan Miramontes Gomez</p>
     </footer>
 
     <div id="modal-carrito" class="modal hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
@@ -233,11 +135,11 @@
                     <input type="text" id="colonia" placeholder="Colonia" required class="w-full p-2 border rounded">
                     <input type="text" id="municipio" placeholder="Municipio/Alcaldía" required class="w-full p-2 border rounded">
                     <input type="text" id="codigo_postal" placeholder="Código Postal" required class="w-full p-2 border rounded">
-                    <input type="tel" id="telefono" placeholder="Teléfono WhatsApp (52...)" required class="w-full p-2 border rounded">
+                    <input type="tel" id="telefono" placeholder="Teléfono WhatsApp (ej. 52XXXXXXXXXX)" required class="w-full p-2 border rounded">
                     
                     <button type="submit" id="btn-comprar-final"
                             class="w-full mt-6 bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-bold transition">
-                        Comprar y Pagar (Generar Link de Pago)
+                        Comprar y Pagar (Generar Mensaje con Datos de Pago)
                     </button>
                 </form>
                 <button id="btn-volver-carrito" class="w-full mt-2 text-sm text-gray-600 hover:text-green-700">
@@ -249,10 +151,13 @@
     </div>
     
     <script>
-        // --- 1. LÓGICA DEL CARRITO Y PEDIDO ---
-        let carrito = []; // Almacena los productos seleccionados
-        const WHATSAPP_NUMBER = '528117875917'; // Tu número de WhatsApp
+        // =========================================================================
+        // --- SECCIÓN DE LÓGICA CENTRAL DE LA TIENDA ---
+        // =========================================================================
 
+        let carrito = []; 
+
+        // Referencias a elementos del DOM
         const modalCarrito = document.getElementById('modal-carrito');
         const listaCarrito = document.getElementById('lista-carrito');
         const totalCarrito = document.getElementById('total-carrito');
@@ -261,21 +166,26 @@
         const contadorMenu = document.getElementById('contador-menu');
         const seccionCarrito = document.getElementById('seccion-carrito');
         const seccionEnvio = document.getElementById('seccion-envio');
+        const formularioEnvio = document.getElementById('formulario-envio');
+        const productosContainer = document.getElementById('productos');
+        const buscador = document.getElementById('buscador');
 
-        // Función para actualizar el contador de productos en el carrito
+
+        // --- 1. LÓGICA DEL CARRITO (Añadir, Quitar, Renderizar) ---
+
         function actualizarContadores() {
             const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
             contadorFlotante.textContent = totalItems;
             contadorMenu.textContent = totalItems;
             btnIniciarCompra.disabled = totalItems === 0;
+            // Cambia el color del botón flotante si hay items
             if (totalItems > 0) {
-                document.getElementById('carrito-flotante').classList.add('bg-red-500');
+                document.getElementById('carrito-flotante').classList.replace('bg-gray-400', 'bg-red-500');
             } else {
-                document.getElementById('carrito-flotante').classList.remove('bg-red-500');
+                document.getElementById('carrito-flotante').classList.replace('bg-red-500', 'bg-gray-400');
             }
         }
 
-        // Función principal para renderizar el contenido del carrito
         function renderizarCarrito() {
             listaCarrito.innerHTML = '';
             let total = 0;
@@ -283,6 +193,7 @@
             if (carrito.length === 0) {
                 listaCarrito.innerHTML = '<li class="text-center text-gray-500 py-4">Tu carrito está vacío.</li>';
                 totalCarrito.textContent = '$0.00 MXN';
+                actualizarContadores();
                 return;
             }
 
@@ -311,9 +222,29 @@
             actualizarContadores();
         }
 
+        function handleAddToCart(e) {
+            const productoDiv = e.target.closest('.producto');
+            const id = productoDiv.dataset.id;
+            const nombre = productoDiv.dataset.nombre;
+            const precio = parseFloat(productoDiv.dataset.precio);
+
+            const itemExistente = carrito.find(item => item.id === id);
+
+            if (itemExistente) {
+                itemExistente.cantidad++;
+            } else {
+                carrito.push({ id, nombre, precio, cantidad: 1 });
+            }
+            
+            renderizarCarrito();
+            alert(`"${nombre}" añadido al carrito. Total: ${carrito.reduce((sum, item) => sum + item.cantidad, 0)} pzas.`);
+        }
+        
         // Manejadores de eventos para Carrito (sumar, restar, eliminar)
         listaCarrito.addEventListener('click', (e) => {
             const index = e.target.dataset.index;
+            if (index === undefined) return; // Evita errores si se hace clic fuera de los botones
+
             if (e.target.classList.contains('btn-sumar')) {
                 carrito[index].cantidad++;
             } else if (e.target.classList.contains('btn-restar')) {
@@ -326,35 +257,14 @@
             renderizarCarrito();
         });
 
-        // Evento para añadir productos al carrito
-        document.querySelectorAll('.btn-anadir-carrito').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const productoDiv = e.target.closest('.producto');
-                const id = productoDiv.dataset.id;
-                const nombre = productoDiv.dataset.nombre;
-                const precio = parseFloat(productoDiv.dataset.precio);
 
-                const itemExistente = carrito.find(item => item.id === id);
-
-                if (itemExistente) {
-                    itemExistente.cantidad++;
-                } else {
-                    carrito.push({ id, nombre, precio, cantidad: 1 });
-                }
-                
-                renderizarCarrito();
-                alert(`"${nombre}" añadido al carrito.`);
-            });
-        });
-
-        // --- 2. GESTIÓN DEL MODAL Y SECCIONES ---
+        // --- 2. GESTIÓN DEL MODAL Y NAVEGACIÓN ---
         
         // Abrir/Cerrar Carrito
         document.getElementById('carrito-flotante').addEventListener('click', () => modalCarrito.classList.remove('hidden'));
         document.getElementById('abrir-carrito-menu').addEventListener('click', () => modalCarrito.classList.remove('hidden'));
         document.getElementById('cerrar-carrito').addEventListener('click', () => {
             modalCarrito.classList.add('hidden');
-            // Asegurarse de volver a la vista del carrito
             seccionCarrito.classList.remove('hidden');
             seccionEnvio.classList.add('hidden');
         });
@@ -370,10 +280,9 @@
             seccionCarrito.classList.remove('hidden');
         });
 
-        // --- 3. LÓGICA DE COMPRA Y WHATSAPP ---
 
-        const formularioEnvio = document.getElementById('formulario-envio');
-        
+        // --- 3. LÓGICA DE COMPRA Y WHATSAPP (SEMI-MANUAL) ---
+
         formularioEnvio.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -389,71 +298,74 @@
                 telefono: document.getElementById('telefono').value,
             };
 
-            // 2. Generar el resumen del pedido
+            // 2. Generar el resumen del pedido y total
             let total = 0;
             let resumenProductos = '';
-            let orderID = Date.now(); // Genera un ID de pedido simple
+            // ID Único basado en el timestamp (útil para referencia)
+            const orderID = `WEB-${Date.now().toString().slice(-8)}`; 
 
             carrito.forEach(item => {
                 const subtotal = item.precio * item.cantidad;
                 total += subtotal;
-                resumenProductos += `* ${item.nombre} (${item.cantidad} pza) - $${subtotal.toFixed(2)} MXN%0A`; // %0A es salto de línea en URL
+                // Usa %0A para saltos de línea en WhatsApp
+                resumenProductos += ` - ${item.nombre} (x${item.cantidad}) - $${subtotal.toFixed(2)} MXN%0A`;
             });
             
-            // 3. Crear el mensaje de WhatsApp (URL-encoded)
-            const mensajeWA = `
-*--- 🧾 PEDIDO NUEVO (ID: #${orderID}) ---*%0A%0A
-*RESUMEN DE PRODUCTOS:*%0A
-${resumenProductos}
-*TOTAL: $${total.toFixed(2)} MXN*%0A%0A
-*DETALLES DE ENVÍO:*%0A
-Cliente: ${datosEnvio.nombre}%0A
-Teléfono: ${datosEnvio.telefono}%0A
-Dirección: Calle ${datosEnvio.calle} No. Ext. ${datosEnvio.num_ext}${datosEnvio.num_int ? ', No. Int. ' + datosEnvio.num_int : ''}%0A
-Colonia: ${datosEnvio.colonia}%0A
-Municipio: ${datosEnvio.municipio}%0A
-C.P.: ${datosEnvio.codigo_postal}%0A%0A
-*--- 💳 PASO 4.5: ENLACE DE PAGO ---*%0A
-*¡El pago debe confirmarse antes de enviar!*%0A
-*ENLACE DE PAGO SIMULADO:*%0A
-https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}%0A%0A
-*El cliente ya fue redirigido al enlace de pago. ¡Espera el webhook de confirmación!*
-            `.trim();
-            
-            // 4. Redirigir al cliente a la Pasarela de Pago (simulación)
-            alert('Serás redirigido a la pasarela de pago (SIMULACIÓN). Una vez pagues, el vendedor recibirá el pedido por WhatsApp.');
-            
-            // SIMULACIÓN: Redireccionamos a una página de pago ficticia (la real sería el Link de Pago)
-            window.location.href = `https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}`;
+            // 3. Define las instrucciones de pago usando tus datos REALES
+            const datosBancarios = `
+*INSTRUCCIONES DE PAGO:*
+Monto Total a Transferir: *$${total.toFixed(2)} MXN*%0A%0A
+*DATOS BANCARIOS (${STORE_CONFIG.PAGO.BANCO}):*%0A
+Banco: ${STORE_CONFIG.PAGO.BANCO}%0A
+CLABE Interbancaria: ${STORE_CONFIG.PAGO.CLABE}%0A
+Nombre del Beneficiario: ${STORE_CONFIG.PAGO.BENEFICIARIO}%0A%0A
+*¡MUY IMPORTANTE!*
+1. Por favor, realiza la transferencia por el monto exacto.
+2. *Envíanos la FOTO o FICHA de pago* por este chat para que podamos confirmar la recepción del dinero y procesar tu envío.
+`;
 
-            // 5. Enviar el WhatsApp (esto lo hacemos *después* de que el cliente sea redirigido)
-            setTimeout(() => {
-                const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensajeWA)}`;
-                window.open(urlWhatsApp, '_blank');
-            }, 500); 
+            // 4. Arma el mensaje final
+            const mensajeWA = encodeURIComponent(
+                `¡NUEVO PEDIDO WEB! #${orderID}\n\n` +
+                `*CLIENTE:*\n` +
+                `Nombre: ${datosEnvio.nombre}\n` +
+                `Teléfono: ${datosEnvio.telefono}\n\n` +
+                `*DIRECCIÓN DE ENVÍO:*\n` +
+                `${datosEnvio.calle} #${datosEnvio.num_ext}` + 
+                (datosEnvio.num_int ? ` Int. ${datosEnvio.num_int}` : '') + `\n` +
+                `Colonia: ${datosEnvio.colonia}\n` +
+                `Municipio: ${datosEnvio.municipio}\n` +
+                `C.P.: ${datosEnvio.codigo_postal}\n\n` +
+                `*DETALLE DEL PEDIDO:*\n${resumenProductos}\n` +
+                '-----------------------------------\n' +
+                datosBancarios
+            );
 
-            // 6. Limpiar carrito y cerrar modal
+            // 5. Abrir WhatsApp en una nueva pestaña
+            const urlWhatsApp = `https://wa.me/${STORE_CONFIG.WHATSAPP_NUMERO}?text=${mensajeWA}`;
+            window.open(urlWhatsApp, '_blank');
+            
+            // 6. Alerta de confirmación al cliente (opcional)
+            alert('¡Pedido Enviado! Serás redirigido a WhatsApp para enviar el mensaje con los datos de pago. Por favor, confirma el envío en WhatsApp.');
+
+            // 7. Limpiar carrito y cerrar modal
             carrito = [];
             renderizarCarrito();
             modalCarrito.classList.add('hidden');
+            formularioEnvio.reset();
         });
 
         // --- 4. SCRIPT DEL BUSCADOR Y VISOR DE IMÁGENES ---
 
-        const buscador = document.getElementById('buscador');
-        const productos = document.querySelectorAll('.producto');
-
         buscador.addEventListener('input', () => {
+          const productos = document.querySelectorAll('.producto');
           const filtro = buscador.value.toLowerCase();
           productos.forEach(producto => {
-            // El display debe ser 'block' para que funcione el grid
             producto.style.display = producto.textContent.toLowerCase().includes(filtro) ? 'flex' : 'none';
           });
         });
-        
-        // Modal de Zoom (Se mantiene)
-        const imagenes = document.querySelectorAll('.imagen-zoom'); 
 
+        // Código para el modal de zoom de imagen (Ya existente)
         const modal = document.createElement('div');
         modal.id = 'modalImagen';
         modal.className =
@@ -482,14 +394,13 @@ https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}%0A%0A
         const imagenAmpliada = modal.querySelector('#imagenAmpliada');
         const cerrarModal = modal.querySelector('#cerrarModal');
         const descargarBtn = modal.querySelector('#descargarBtn');
-
-        imagenes.forEach(img => {
-          img.addEventListener('click', () => {
+        
+        function handleImageZoom(e) {
+            const img = e.target;
             imagenAmpliada.src = img.src;
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; 
-          });
-        });
+        }
 
         cerrarModal.addEventListener('click', () => {
           modal.classList.add('hidden');
@@ -520,40 +431,112 @@ https://pasarela.pago.com/checkout?id=${orderID}&monto=${total.toFixed(2)}%0A%0A
           }
         });
 
+
         // --- 5. LÓGICA DEL CARRUSEL DE IMAGEN/FICHA TÉCNICA ---
 
         function setupCarousels() {
-            // Recorre todos los botones de navegación
             document.querySelectorAll('.btn-prev, .btn-next').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    // Encuentra el contenedor .producto más cercano
-                    const productoDiv = e.target.closest('.producto');
-                    // Busca el contenedor de las imágenes dentro de ese producto
-                    const carousel = productoDiv.querySelector('.carousel-container');
-                    
-                    if (!carousel) return;
-
-                    // Calcula el ancho de un solo item (100% del contenedor)
-                    const itemWidth = carousel.offsetWidth; 
-                    
-                    if (e.target.classList.contains('btn-next')) {
-                        // Desliza al siguiente item (Ficha Técnica)
-                        carousel.scrollLeft += itemWidth;
-                    } else if (e.target.classList.contains('btn-prev')) {
-                        // Desliza al item anterior (Imagen de Producto)
-                        carousel.scrollLeft -= itemWidth;
-                    }
-                    
-                    // Asegúrate de que no se salga de los límites
-                    // El scroll-snap ayuda, pero esto asegura la lógica de las flechas
-                });
+                button.removeEventListener('click', handleCarouselClick);
+                button.addEventListener('click', handleCarouselClick);
             });
         }
+        
+        function handleCarouselClick(e) {
+            const productoDiv = e.target.closest('.producto');
+            const carousel = productoDiv.querySelector('.carousel-container');
+            
+            if (!carousel) return;
 
+            const itemWidth = carousel.offsetWidth; 
+            
+            if (e.target.classList.contains('btn-next')) {
+                carousel.scrollLeft += itemWidth;
+            } else if (e.target.classList.contains('btn-prev')) {
+                carousel.scrollLeft -= itemWidth;
+            }
+        }
+
+
+        // --- 6. FUNCIÓN CENTRAL: GENERAR PÁGINA DESDE LA CONFIGURACIÓN ---
+        
+        function buildPageContent() {
+            
+            // A. Aplicar Configuración General
+            document.getElementById('promo-banner').textContent = STORE_CONFIG.PROMOCION_TEXTO;
+            document.getElementById('logo-img').src = STORE_CONFIG.LOGO_URL;
+            document.getElementById('nombre-tienda').textContent = STORE_CONFIG.NOMBRE_TIENDA;
+            document.body.style.backgroundImage = `url('${STORE_CONFIG.FONDO_URL}')`;
+            document.getElementById('contacto-wa').href = `https://wa.me/${STORE_CONFIG.WHATSAPP_NUMERO}`;
+
+            // B. Generar Productos
+            productosContainer.innerHTML = ''; 
+
+            STORE_CONFIG.PRODUCTOS_DISPONIBLES.forEach(p => {
+                const productoHTML = `
+                    <div class="producto bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition p-4 sm:p-5 text-center relative flex flex-col justify-between"
+                        data-id="${p.id}" 
+                        data-nombre="${p.nombre}" 
+                        data-precio="${p.precio}">
+                        
+                        <div class="relative">
+                            <div class="carousel-container flex overflow-x-scroll snap-x snap-mandatory rounded-lg mb-4">
+                                
+                                <div class="carousel-item flex justify-center items-center">
+                                    <img src="${p.imagenProducto}" alt="Producto ${p.id}" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg">
+                                </div>
+                                
+                                <div class="carousel-item flex justify-center items-center">
+                                    <img src="${p.imagenFicha}" alt="Ficha técnica ${p.id}" class="w-full h-auto max-h-64 sm:max-h-72 object-contain rounded-lg cursor-pointer imagen-zoom">
+                                </div>
+
+                            </div>
+                            
+                            <button class="btn-prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full ml-1 hover:bg-opacity-70 transition z-10" data-target="${p.id}">
+                                &lt;
+                            </button>
+                            <button class="btn-next absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full mr-1 hover:bg-opacity-70 transition z-10" data-target="${p.id}">
+                                &gt;
+                            </button>
+                        </div>
+                        <div class="flex flex-col flex-grow justify-end">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-1">${p.nombre}</h3>
+                            <p class="precio-producto text-green-600 font-bold text-base sm:text-lg mb-2">$${p.precio.toFixed(2)} MXN</p>
+                            <p class="text-xs sm:text-sm text-gray-500">${p.descripcionCorta}</p>
+                            <button class="btn-anadir-carrito mt-3 w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition">
+                                ➕ Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productosContainer.insertAdjacentHTML('beforeend', productoHTML);
+            });
+
+            // C. Re-inicializar Eventos
+            setupProductEventListeners(); 
+            setupCarousels(); 
+        }
+
+        function setupProductEventListeners() {
+            document.querySelectorAll('.btn-anadir-carrito').forEach(button => {
+                button.removeEventListener('click', handleAddToCart); 
+                button.addEventListener('click', handleAddToCart);
+            });
+
+            document.querySelectorAll('.imagen-zoom').forEach(img => {
+                img.removeEventListener('click', handleImageZoom); 
+                img.addEventListener('click', handleImageZoom);
+            });
+        }
+        
         // Inicializar todas las funciones al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
-            renderizarCarrito();
-            setupCarousels(); // Inicializa el carrusel
+            // Asegúrate de que la configuración se cargó
+            if (typeof STORE_CONFIG === 'undefined') {
+                alert("Error: No se encontró el archivo config.js. Asegúrate de que está en la misma carpeta.");
+            } else {
+                buildPageContent(); // Genera todo el contenido dinámico
+                renderizarCarrito(); // Carga el carrito vacío/existente
+            }
         });
         
     </script>
